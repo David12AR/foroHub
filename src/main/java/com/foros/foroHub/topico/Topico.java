@@ -25,6 +25,7 @@ public class Topico {
     @Column(name = "fecha_creacion", nullable = false)
     private LocalDateTime fechaCreacion;
     private String status;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id", nullable = false)
     private Usuario autor;

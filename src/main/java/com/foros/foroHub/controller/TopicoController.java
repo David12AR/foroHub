@@ -1,20 +1,18 @@
 package com.foros.foroHub.controller;
 
-import com.foros.foroHub.topico.DatosDetalleTopico;
-import com.foros.foroHub.topico.DatosRegistroTopico;
-import com.foros.foroHub.topico.Topico;
-import com.foros.foroHub.topico.TopicoRepository;
+import com.foros.foroHub.topico.*;
 import com.foros.foroHub.usuario.Usuario;
 import com.foros.foroHub.usuario.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -52,4 +50,13 @@ public class TopicoController {
         URI url = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(url).body(respuesta);
     }
+
+    @GetMapping
+    public Page<DatosListaTopico> Listar(@PageableDefault(size = 10, sort = "curso", direction = Sort.Direction.ASC) Pageable paginacion) {
+        return repository.findAll(paginacion).map(DatosListaTopico::new);
+
+    }
+
+
+
 }

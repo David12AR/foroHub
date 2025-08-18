@@ -2,6 +2,7 @@ package com.foros.foroHub.topico;
 
 import com.foros.foroHub.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,6 +43,22 @@ public class Topico {
         this.curso = datos.curso();
         this.respuestas = "0";
     }
+
+    public void actualizarInformacion(@Valid DatosActualizarTopico datos) {
+
+        if (datos.titulo() != null) {
+            this.titulo = datos.titulo();
+        }
+
+        if (datos.mensaje() != null) {
+            this.mensaje = datos.mensaje();
+        }
+
+        if (datos.curso() != null) {
+            this.curso = datos.curso();
+        }
+    }
+
 }
 
 

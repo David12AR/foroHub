@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
@@ -56,7 +57,39 @@ public class TopicoController {
         return repository.findAll(paginacion).map(DatosListaTopico::new);
 
     }
+    @GetMapping("/{id}")
+    public ResponseEntity detallar(@PathVariable Long id){
+        var topico = repository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DatosDetalleTopico(topico));
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datos) {
+        Optional<Topico> optionalTopico = repository.findById(id);
+
+        if (optionalTopico.isPresent()) {
+            Topico topico = optionalTopico.get();
+
+            topico.actualizarInformacion(datos);
 
 
+            return ResponseEntity.ok(new DatosDetalleTopico(topico));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
 
+    }
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity eliminar(@PathVariable Long id){
+        Optional<Topico> optionalTopico = repository.findById(id);
+        if (optionalTopico.isPresent()) {
+            repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

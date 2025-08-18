@@ -12,5 +12,15 @@ public record DatosDetalleTopico(
         String curso
 
 ) {
-
+    public DatosDetalleTopico(Topico topico){
+        this(
+                topico.getId(),
+                topico.getTitulo(),
+                topico.getMensaje(),
+                topico.getFechaCreacion(),
+                topico.getStatus(),
+                topico.getAutor().getNombre(),
+                topico.getCurso()
+    );
+    }
 }

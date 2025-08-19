@@ -20,7 +20,9 @@ public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false)
     private String titulo;
+    @Column(unique = true, nullable = false)
     private String mensaje;
 
     @Column(name = "fecha_creacion", nullable = false)

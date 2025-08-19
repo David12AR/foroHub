@@ -1,5 +1,6 @@
 package com.foros.foroHub.controller;
 
+import com.foros.foroHub.ValidacionException;
 import com.foros.foroHub.topico.*;
 import com.foros.foroHub.usuario.Usuario;
 import com.foros.foroHub.usuario.UsuarioRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +38,14 @@ public class TopicoController {
         Usuario autor = usuarioRepository.findById(datos.autorId())
                 .orElseThrow(() -> new EntityNotFoundException("Autor no encontrado"));
 
+        if (repository.existsByTitulo(datos.titulo())) {
+            throw new ValidacionException("Ya existe un tópico con el título '" + datos.titulo() + "'.");
+        }
+
+        if (repository.existsByMensaje(datos.mensaje())) {
+            throw new ValidacionException("Ya existe un tópico con el mismo mensaje.");
+        }
+
         Topico topico = repository.save(new Topico(datos, autor));
 
         DatosDetalleTopico respuesta = new DatosDetalleTopico(
@@ -53,8 +63,9 @@ public class TopicoController {
     }
 
     @GetMapping
-    public Page<DatosListaTopico> Listar(@PageableDefault(size = 10, sort = "curso", direction = Sort.Direction.ASC) Pageable paginacion) {
-        return repository.findAll(paginacion).map(DatosListaTopico::new);
+    public ResponseEntity<Page<DatosListaTopico>> Listar(@PageableDefault(size = 10, sort = "curso", direction = Sort.Direction.ASC) Pageable paginacion) {
+        var page = repository.findAll(paginacion).map(DatosListaTopico::new);
+        return ResponseEntity.ok(page);
 
     }
     @GetMapping("/{id}")
@@ -71,13 +82,11 @@ public class TopicoController {
 
         if (optionalTopico.isPresent()) {
             Topico topico = optionalTopico.get();
-
             topico.actualizarInformacion(datos);
-
-
             return ResponseEntity.ok(new DatosDetalleTopico(topico));
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El recurso solicitado no existe. Verifique el ID.");
         }
 
     }
@@ -87,9 +96,11 @@ public class TopicoController {
         Optional<Topico> optionalTopico = repository.findById(id);
         if (optionalTopico.isPresent()) {
             repository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.OK.value())
+                .body("El tópico con id " + id + " fue eliminado correctamente");
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El recurso solicitado no existe. Verifique el ID.");
         }
     }
 }

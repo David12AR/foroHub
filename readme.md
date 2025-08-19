@@ -69,7 +69,8 @@ Además, todas las acciones requieren autenticación mediante **usuario y contra
      <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/variable_token_request.JPG?raw=true" width="500">
 
    - En Insomnia se configuró como variable de entorno, para usarlo automáticamente en cada request.
-
+    
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/variable_ambiente_token.JPG?raw=true" width="500">
 
 
 2. **Registro de un tópico**  
@@ -97,7 +98,7 @@ Además, todas las acciones requieren autenticación mediante **usuario y contra
 
     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/listar_topicos.JPG?raw=true" width="500">
 
-   - Ejemplo: `?page=0` para la primera página.  
+   - Ejemplo: `?page=1` para la segunda página.  
 
     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/listar_topicos_siguiente_pagina.JPG?raw=true" width="500">
 

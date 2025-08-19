@@ -96,45 +96,45 @@ Además, todas las acciones requieren autenticación mediante **usuario y contra
    - Lista todos los tópicos ordenados **ascendentemente por curso**.  
    - La paginación es automática (10 por página).
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/listar_topicos.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/listar_topicos.JPG?raw=true" width="500">
 
    - Ejemplo: `?page=1` para la segunda página.  
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/listar_topicos_siguiente_pagina.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/listar_topicos_siguiente_pagina.JPG?raw=true" width="500">
 
 4. **Detallar tópico**  
    - Consulta un tópico específico por ID.  
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/detallar_topico.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/detallar_topico.JPG?raw=true" width="500">
 
    - Si el ID no existe, el sistema lo notificará.  
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/detallar_topico_validacion.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/detallar_topico_validacion.JPG?raw=true" width="500">
 
 5. **Actualizar tópico**  
    - Se actualiza indicando el ID en la URL.  
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/actualizar_topico.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/actualizar_topico.JPG?raw=true" width="500">
 
 
    - Permite modificar cualquier campo, respetando la validación de duplicados.  
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/actualizar_topico_validacion_duplicado.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/actualizar_topico_validacion_duplicado.JPG?raw=true" width="500">
 
    - Si el ID no existe, se devuelve un mensaje de error.  
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/actualizar_topico_validacion_vacio_id.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/actualizar_topico_validacion_vacio_id.JPG?raw=true" width="500">
 
 
 6. **Eliminar tópico**  
    - Se elimina indicando el ID en la URL.  
    - El sistema confirmará la eliminación.
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/eliminar_topico.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/eliminar_topico.JPG?raw=true" width="500">
 
    - Si el ID no existe, se notificará al usuario.  
 
-    <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/eliminar_topico_validacio_vacio_id.JPG?raw=true" width="500">
+     <img src="https://github.com/David12AR/foroHub/blob/main/imagenes/eliminar_topico_validacio_vacio_id.JPG?raw=true" width="500">
 
 
 ---
